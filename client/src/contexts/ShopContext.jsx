@@ -1,20 +1,16 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
-// Khởi tạo Context để chia sẻ dữ liệu e-commerce mini toàn ứng dụng
 const ShopContext = createContext();
 
 export const ShopProvider = ({ children }) => {
-  // Khởi tạo state từ Local Storage (nếu có) để giữ dữ liệu khi F5 trang
   const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem('sony_cart')) || []);
   const [favorites, setFavorites] = useState(() => JSON.parse(localStorage.getItem('sony_favs')) || []);
   const [viewed, setViewed] = useState(() => JSON.parse(localStorage.getItem('sony_viewed')) || []);
 
-  // Tự động đồng bộ state xuống Local Storage mỗi khi có thay đổi
   useEffect(() => localStorage.setItem('sony_cart', JSON.stringify(cart)), [cart]);
   useEffect(() => localStorage.setItem('sony_favs', JSON.stringify(favorites)), [favorites]);
   useEffect(() => localStorage.setItem('sony_viewed', JSON.stringify(viewed)), [viewed]);
 
-  // Xử lý thêm sản phẩm vào giỏ hàng (Cộng dồn số lượng nếu đã tồn tại)
   const addToCart = (product) => {
     setCart((prev) => {
       const existing = prev.find((item) => item.id === product.id);
@@ -26,7 +22,25 @@ export const ShopProvider = ({ children }) => {
     alert(`Đã thêm cấu hình "${product.label}" vào giỏ hàng!`);
   };
 
-  // Xử lý Thêm/Xóa khỏi danh sách Yêu thích
+  const updateQuantity = (productId, delta) => {
+    setCart((prev) => prev.map((item) => {
+      if (item.id === productId) {
+        const newQuantity = item.quantity + delta;
+        return newQuantity >= 1 ? { ...item, quantity: newQuantity } : item;
+      }
+      return item;
+    }));
+  };
+
+  const removeFromCart = (productId) => {
+    setCart((prev) => prev.filter((item) => item.id !== productId));
+  };
+
+  // Hàm dọn dẹp giỏ hàng sau khi thanh toán thành công
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const toggleFavorite = (product) => {
     setFavorites((prev) => {
       const isFav = prev.some((item) => item.id === product.id);
@@ -34,7 +48,6 @@ export const ShopProvider = ({ children }) => {
     });
   };
 
-  // Xử lý lưu lịch sử xem (Giới hạn lưu 5 cấu hình gần nhất tránh đầy bộ nhớ)
   const addViewedProduct = (product) => {
     setViewed((prev) => {
       const filtered = prev.filter((item) => item.id !== product.id);
@@ -43,11 +56,11 @@ export const ShopProvider = ({ children }) => {
   };
 
   return (
-    <ShopContext.Provider value={{ cart, favorites, viewed, addToCart, toggleFavorite, addViewedProduct }}>
+    // Đã bổ sung clearCart vào value
+    <ShopContext.Provider value={{ cart, favorites, viewed, addToCart, toggleFavorite, addViewedProduct, updateQuantity, removeFromCart, clearCart }}>
       {children}
     </ShopContext.Provider>
   );
 };
 
-// Hook tiện ích để các Component khác dễ dàng lấy dữ liệu từ kho
 export const useShop = () => useContext(ShopContext);
