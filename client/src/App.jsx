@@ -7,6 +7,7 @@ import Features from './sections/Features';
 import ProductShowcase from './sections/ProductShowcase';
 import Specs from './sections/Specs';
 import Subscribe from './sections/Subscribe';
+import FloatingCart from './components/FloatingCart';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Subscribe />
       <Footer />
       <Chatbot />
+      <FloatingCart />
     </div>
   );
 }

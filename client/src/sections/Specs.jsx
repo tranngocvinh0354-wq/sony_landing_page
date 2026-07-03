@@ -1,5 +1,4 @@
-// Data tách riêng khỏi JSX -> thêm/sửa/xoá 1 dòng thông số chỉ cần sửa mảng này,
-// không phải copy-paste cả khối div grid mỗi lần
+// Dữ liệu danh sách các thông số kỹ thuật của sản phẩm
 const SPECS = [
   { label: 'Cảm biến', value: 'APS-C Exmor R CMOS 26.0 Megapixel' },
   { label: 'Bộ xử lý hình ảnh', value: 'BIONZ XR™ & AI Processing Unit' },
@@ -9,16 +8,18 @@ const SPECS = [
   { label: 'Ống kính đi kèm (Bản M)', value: 'Sony E 18-135mm f/3.5-5.6 OSS' },
 ];
 
+// Giao diện hiển thị khu vực bảng thông số kỹ thuật
 const Specs = () => {
   return (
     <section id="specs" className="py-32 px-6 max-w-4xl mx-auto">
       <div className="space-y-16">
+        {/* Khu vực tiêu đề của phần thông số */}
         <div className="text-center space-y-4">
           <h2 className="text-xs uppercase tracking-widest text-amber-500 font-bold">Thông số kỹ thuật</h2>
           <p className="text-3xl font-bold tracking-tight">Chi Tiết Cấu Hình A6700M</p>
         </div>
 
-        {/* dùng <dl> thay vì div thường: đây về ngữ nghĩa là danh sách "thuật ngữ - định nghĩa" (label - value) */}
+        {/* Khai báo danh sách mô tả (description list) để tối ưu ngữ nghĩa HTML */}
         <dl className="border-t border-zinc-800 divide-y divide-zinc-900 text-sm">
           {SPECS.map(({ label, value }) => (
             <div key={label} className="grid grid-cols-2 py-5">

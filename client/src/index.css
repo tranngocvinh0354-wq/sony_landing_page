@@ -1,4 +1,5 @@
 :root {
+  /* Khai báo biến màu sắc và nền (Light Mode) */
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -8,21 +9,17 @@
   --accent-bg: rgba(170, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  /* --sans và --heading hiện đang giữ cùng 1 giá trị.
-     Nếu về sau muốn dùng font khác cho tiêu đề (VD: 1 display font riêng),
-     việc tách sẵn 2 biến từ bây giờ giúp chỉ cần sửa --heading mà không ảnh hưởng body text.
-     Nếu chắc chắn sẽ luôn dùng chung, có thể gộp lại thành 1 biến --font-family duy nhất để giảm trùng lặp. */
+  /* Cấu hình Font chữ hệ thống */
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  /* Kích thước layout tối đa của #root — tách thành biến để không phải nhớ số 1126px
-     nằm rải rác, và nếu cần đổi độ rộng trang chỉ sửa 1 chỗ */
+  /* Khai báo chiều rộng tối đa của layout chính */
   --max-width: 1126px;
 
+  /* Cấu hình thuộc tính hiển thị văn bản cấp cao nhất */
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
@@ -38,6 +35,7 @@
   }
 }
 
+/* Ghi đè biến màu sắc khi kích hoạt giao diện tối (Dark Mode) */
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
@@ -49,23 +47,21 @@
     --accent-bg: rgba(192, 132, 252, 0.15);
     --accent-border: rgba(192, 132, 252, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
   }
 
-  /* SỬA LỖI: selector gốc là "#social .button-icon", nhưng không có id="social"
-     ở đâu trong markup/CSS — icon nằm trong #next-steps ul a .button-icon.
-     Rule cũ không bao giờ được áp dụng -> icon bị sai màu (tối trên nền tối) ở dark mode.
-     Đổi đúng theo cấu trúc thực tế: */
+  /* Đảo ngược màu icon mạng xã hội trên nền tối */
   #next-steps .button-icon {
     filter: invert(1) brightness(2);
   }
 }
 
+/* Xóa khoảng cách mặc định của trình duyệt */
 body {
   margin: 0;
 }
 
+/* Cấu hình khung layout chính của ứng dụng */
 #root {
   width: var(--max-width);
   max-width: 100%;
@@ -78,13 +74,14 @@ body {
   box-sizing: border-box;
 }
 
-h1,
-h2 {
+/* Định dạng chung cho các thẻ tiêu đề */
+h1, h2 {
   font-family: var(--heading);
   font-weight: 500;
   color: var(--text-h);
 }
 
+/* Định dạng tiêu đề cấp 1 (Hero Title) */
 h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
@@ -96,6 +93,7 @@ h1 {
   }
 }
 
+/* Định dạng tiêu đề cấp 2 (Section Title) */
 h2 {
   font-size: 24px;
   line-height: 118%;
@@ -107,18 +105,20 @@ h2 {
   }
 }
 
+/* Xóa khoảng cách mặc định của đoạn văn */
 p {
   margin: 0;
 }
 
-code,
-.counter {
+/* Định dạng font chữ Monospace cho các khối code và bộ đếm */
+code, .counter {
   font-family: var(--mono);
   display: inline-flex;
   border-radius: 4px;
   color: var(--text-h);
 }
 
+/* Định dạng nền và khoảng đệm cho khối code */
 code {
   font-size: 15px;
   line-height: 135%;
@@ -126,9 +126,7 @@ code {
   background: var(--code-bg);
 }
 
-/* Thiếu trạng thái :focus-visible cho các phần tử tương tác cơ bản (a, button)
-   -> hiện chỉ .counter có outline khi focus bằng bàn phím. Nếu file khác trong dự án
-   chưa tự định nghĩa focus style riêng cho link/button, nên thêm 1 rule chung ở đây: */
+/* Thiết lập viền báo hiệu (outline) khi thao tác bằng bàn phím (Accessibility) */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--accent);

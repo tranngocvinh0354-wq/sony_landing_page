@@ -1,6 +1,7 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-const DEFAULT_TIMEOUT_MS = 15000; // chat có thể mất thời gian chờ AI trả lời, để timeout dài hơn form thường
+// Cài đặt thời gian chờ tối đa cho request (15 giây)
+const DEFAULT_TIMEOUT_MS = 15000; 
 
 /**
  * Gửi tin nhắn chat lên backend và nhận phản hồi.
@@ -9,17 +10,17 @@ const DEFAULT_TIMEOUT_MS = 15000; // chat có thể mất thời gian chờ AI t
  * @returns {Promise<{ reply: string }>}
  */
 export const sendChatMessage = async (message, history = []) => {
+  // Kiểm tra và chặn tin nhắn rỗng ngay từ Frontend
   if (!message?.trim()) {
-    // Chặn từ sớm thay vì để backend nhận request rỗng rồi mới báo lỗi
     throw new Error('Tin nhắn không được để trống');
   }
 
-  // AbortController để tự huỷ request nếu server không phản hồi kịp,
-  // tránh người dùng chờ vô thời hạn khi mạng/server có vấn đề
+  // Thiết lập bộ hủy request tự động để chống kẹt mạng (treo ứng dụng)
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
 
   try {
+    // Gửi dữ liệu tin nhắn và lịch sử hội thoại lên API
     const response = await fetch(`${API_URL}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -27,26 +28,31 @@ export const sendChatMessage = async (message, history = []) => {
       signal: controller.signal,
     });
 
+    // Kiểm tra và xử lý các mã lỗi HTTP trả về từ server
     if (!response.ok) {
-      // response.json() có thể tự ném lỗi nếu body không phải JSON hợp lệ
-      // (VD: lỗi 500/502 trả về trang HTML) -> bọc trong try/catch riêng để không che mất lỗi HTTP gốc
       let errorMessage = `Lỗi server (mã ${response.status})`;
+      
+      // Trích xuất thông báo lỗi chi tiết từ định dạng JSON nếu có
       try {
         const err = await response.json();
         errorMessage = err.error || errorMessage;
       } catch {
-        // body không phải JSON -> giữ nguyên errorMessage mặc định ở trên
+        // Giữ nguyên lỗi mặc định nếu phản hồi không phải là JSON
       }
       throw new Error(errorMessage);
     }
 
-    return await response.json(); // { reply: "..." }
+    // Trả về dữ liệu phản hồi thành công
+    return await response.json(); 
   } catch (error) {
+    // Xử lý thông báo khi request bị hủy do quá thời gian chờ
     if (error.name === 'AbortError') {
       throw new Error('Yêu cầu quá thời gian chờ, vui lòng thử lại.');
     }
-    throw error; // các lỗi khác (mạng mất, lỗi từ throw ở trên) truyền nguyên ra ngoài
+    // Trả các lỗi khác (mất mạng, lỗi máy chủ) ra bên ngoài Component
+    throw error; 
   } finally {
+    // Dọn dẹp bộ đếm thời gian khi luồng xử lý kết thúc
     clearTimeout(timeoutId);
   }
 };

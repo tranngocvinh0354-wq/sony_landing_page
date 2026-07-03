@@ -1,11 +1,6 @@
-/* ============================================================
-   BREAKPOINT DÙNG CHUNG: 1024px (mobile/tablet)
-   Lưu ý: CSS thuần không cho phép dùng var() trong @media,
-   nên nếu dự án có dùng Sass/PostCSS, nên đổi breakpoint này
-   thành 1 biến (VD: $bp-tablet: 1024px) để sửa 1 chỗ áp dụng toàn bộ.
-   ============================================================ */
+/* Cấu hình Breakpoint dùng chung cho giao diện Mobile/Tablet (1024px) */
 
-/* --- Counter widget --- */
+/* Nút đếm số (Counter Widget) */
 .counter {
   font-size: 16px;
   padding: 5px 10px;
@@ -25,9 +20,7 @@
   }
 }
 
-/* --- Logo hero: 3 lớp ảnh xếp chồng (base = nền, framework/vite = logo nghiêng phối cảnh) ---
-   Các giá trị rotateX/rotateY/rotateZ/scale bên dưới được canh thủ công theo từng ảnh cụ thể,
-   không nên đổi nếu không có ảnh gốc để so sánh lại góc nghiêng. */
+/* Cụm Logo Hero: Cấu hình 3 lớp ảnh xếp chồng với góc nghiêng 3D (Lưu ý: Giữ nguyên hệ số transform) */
 .hero {
   position: relative;
 
@@ -65,7 +58,7 @@
   }
 }
 
-/* --- Khối căn giữa nội dung chính --- */
+/* Khối chứa và căn giữa nội dung chính của trang */
 #center {
   display: flex;
   flex-direction: column;
@@ -80,7 +73,7 @@
   }
 }
 
-/* --- Khu vực "Next steps": 2 cột (Docs | Community) --- */
+/* Khu vực điều hướng "Next steps" (Chia 2 cột Docs & Community) */
 #next-steps {
   display: flex;
   border-top: 1px solid var(--border);
@@ -107,8 +100,7 @@
   }
 }
 
-/* Cột trái của #next-steps: vẽ đường phân cách dọc trên desktop,
-   chuyển thành đường ngang bên dưới khi xuống mobile (do #next-steps đổi column) */
+/* Cột Docs: Xử lý đường viền phân cách đáp ứng (Responsive) theo kích thước màn hình */
 #docs {
   border-right: 1px solid var(--border);
 
@@ -118,7 +110,7 @@
   }
 }
 
-/* Danh sách link mạng xã hội/liên hệ trong #next-steps */
+/* Các nút liên kết Mạng xã hội & Khám phá */
 #next-steps ul {
   list-style: none;
   padding: 0;
@@ -168,7 +160,7 @@
   }
 }
 
-/* Khoảng đệm cố định trước footer/next-steps */
+/* Khoảng đệm (Spacer) cố định phía trước Footer */
 #spacer {
   height: 88px;
   border-top: 1px solid var(--border);
@@ -178,12 +170,7 @@
   }
 }
 
-/* --- "Ticks": 2 mũi tên tam giác nhỏ ở 2 góc trên (trái/phải) của phần tử cha,
-   thường dùng làm điểm chỉ hướng phía trên 1 khối nội dung (VD: dưới thanh nav) ---
-   Kích thước mũi tên = border-width (5px) => tam giác rộng 10px, cao 5px.
-   top: -4.5px lệch nhẹ so với -5px (border-width) để mũi tên không có khe hở
-   với viền phần tử cha do bo góc/subpixel rendering — đây là giá trị canh tay,
-   không phải lỗi, giữ nguyên nếu không kiểm tra lại trên trình duyệt thật. */
+/* Họa tiết Ticks: Tạo mũi tên góc bằng CSS Borders (Đã căn chỉnh subpixel, không sửa tham số top/margin) */
 .ticks {
   position: relative;
   width: 100%;
