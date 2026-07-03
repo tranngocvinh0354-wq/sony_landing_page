@@ -48,4 +48,4 @@ sequelize.authenticate()
   .catch((err) => {
     console.error('❌ Lỗi kết nối SQL:', err);
   });
-await sequelize.sync({ alter: true });
+
