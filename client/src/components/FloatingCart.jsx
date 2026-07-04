@@ -219,7 +219,7 @@ const FloatingCart = () => {
                     <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
                   </div>
                   <h2 className="text-2xl font-bold text-white">Đặt hàng thành công!</h2>
-                  <p className="text-zinc-400 px-4">Cảm ơn bạn đã tin tưởng HELICORP. Chúng tôi sẽ liên hệ để xác nhận đơn hàng trong thời gian sớm nhất.</p>
+                  <p className="text-zinc-400 px-4">Cảm ơn bạn đã tin tưởng NgocZink. Chúng tôi sẽ liên hệ để xác nhận đơn hàng trong thời gian sớm nhất.</p>
                   <button onClick={handleClose} className="mt-8 px-8 py-3 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-full transition-colors">
                     Tiếp tục mua sắm
                   </button>
