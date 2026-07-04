@@ -182,15 +182,15 @@ const FloatingCart = () => {
                   <div className="flex-1 space-y-4 overflow-y-auto pr-2 custom-scrollbar">
                     <div>
                       <label className="block text-sm text-zinc-400 mb-1">Họ và tên *</label>
-                      <input required type="text" placeholder="Nhập họ tên của bạn" className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors" />
+                      <input name="name" required type="text" placeholder="Nhập họ tên của bạn" className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors" />
                     </div>
                     <div>
                       <label className="block text-sm text-zinc-400 mb-1">Số điện thoại *</label>
-                      <input required type="tel" placeholder="Ví dụ: 0912345678" className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors" />
+                      <input name="phone" required type="tel" placeholder="Ví dụ: 0912345678" className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors" />
                     </div>
                     <div>
                       <label className="block text-sm text-zinc-400 mb-1">Địa chỉ giao hàng *</label>
-                      <textarea required rows="3" placeholder="Ví dụ: Phường 15, Quận Tân Phú, TP.HCM" className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors"></textarea>
+                      <textarea name="address" required rows="3" placeholder="Ví dụ: Phường 15, Quận Tân Phú, TP.HCM" className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors"></textarea>
                     </div>
                     <div className="bg-zinc-900/50 p-4 rounded-lg border border-zinc-800">
                       <div className="flex justify-between text-sm mb-2">
