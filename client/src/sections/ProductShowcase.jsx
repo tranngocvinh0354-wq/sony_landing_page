@@ -5,7 +5,7 @@ import { useShop } from '../contexts/ShopContext';
 // Dữ liệu cấu hình hiển thị các phiên bản sản phẩm (Bổ sung id và price cho tính năng Giỏ hàng)
 const VIEWS = {
   body: { id: 'a6700-body', src: '/body.webp', label: 'Chỉ thân máy', alt: 'Sony A6700 chỉ thân máy', price: '30.990.000đ' },
-  kit: { id: 'a6700-kit', src: '/kit.jpeg', label: 'Kit 18-135mm', alt: 'Sony A6700 kèm ống kính kit 18-135mm', price: '18.990.000đ' },
+  kit: { id: 'a6700-kit', src: '/kit.jpg', label: 'Kit 18-135mm', alt: 'Sony A6700 kèm ống kính kit 18-135mm', price: '18.990.000đ' },
   vlog: { id: 'a6700-vlog', src: '/vlog.jpg', label: 'Setup Vlogger', alt: 'Sony A6700 setup dành cho Vlogger', price: '45.490.000đ' },
 };
 
