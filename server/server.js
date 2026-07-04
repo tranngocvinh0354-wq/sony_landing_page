@@ -13,7 +13,12 @@ const orderRoute = require('./routes/orderRoute'); // Khai báo route đơn hàn
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+// Cấu hình CORS mở cửa cho mọi tên miền 
+app.use(cors({
+  origin: '*', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // --- ĐĂNG KÝ CÁC API ENDPOINTS ---
