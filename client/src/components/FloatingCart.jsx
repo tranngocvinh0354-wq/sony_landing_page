@@ -53,7 +53,7 @@ const FloatingCart = () => {
     try {
       // Gọi API Endpoint của Backend (Sử dụng biến môi trường hoặc cổng mặc định localhost:5000)
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const response = await fetch('https://sony-landing-page-production.up.railway.app/api/orders', {method: 'POST',
+      const response = await fetch('https://sonylandingpage-production.up.railway.app/api/orders', {method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
