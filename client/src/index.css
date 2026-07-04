@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 :root {
   /* Khai báo biến màu sắc và nền (Light Mode) */
   --text: #6b6375;
