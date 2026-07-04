@@ -48,15 +48,14 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl" />
           
           {/* Cấu hình tải ảnh ưu tiên (Eager Load) để tối ưu điểm hiệu năng LCP */}
-          <img
-            src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop"
-            alt="Sony Alpha 6700"
-            width={1000}
-            height={1000}
-            loading="eager"
-            fetchPriority="high"
-            className="w-full h-auto object-contain relative z-10 drop-shadow-[0_0_30px_rgba(245,158,11,0.2)] animate-[float_6s_ease-in-out_infinite] rounded-3xl"
-          />
+          <img 
+          src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=500&auto=format&fit=crop" 
+          alt="Sony Alpha 6700" 
+          width="406" 
+          height="508"
+          fetchpriority="high"
+          class="w-full h-auto object-contain..."
+        />
         </div>
       </div>
     </section>
