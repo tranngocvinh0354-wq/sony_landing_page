@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 // Cấu hình CORS mở cửa cho mọi tên miền 
 app.use(cors({
-  origin: '*', 
+  origin: 'https://sony-landing-page-rho.vercel.app', 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
